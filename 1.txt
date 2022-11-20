@@ -1,0 +1,17 @@
+Transaction Hash: xle1IIxgqL18WrfjgI6LU9XxNf6sYmWFguFSv1gcDKw=
+Transaction Signature: AA==@i1IY9u1clvfS82yM/NmezjelrBX653BE0hJq7vprmncxNw+ka3r5Kznv0tlxFncZhmScfGNmXbHwdg7kM2/uBg==@7AZc+Stf+AUEqcL/M8YI4yx42GSsCchTkRjmkdIefGU=
+Signed Authorities Bitmap: RoaringBitmap<[0, 1, 2]>
+Transaction Kind : Publish
+----- Transaction Effects ----
+Status : Success
+Created Objects:
+  - ID: 0x6d626465936ceeda9d3590ff1ac42940d52afd25 , Owner: Account Address ( 0x1943ae8a0108ff02952b1ff39c25a1b34f680901 )
+  - ID: 0x90aa6f74c3697c793962346291bd1e363d180172 , Owner: Immutable
+Mutated Objects:
+  - ID: 0x00a0924adc1a013bd1eaf11208233c8ff2bcd940 , Owner: Account Address ( 0x1943ae8a0108ff02952b1ff39c25a1b34f680901 )
+
+sui client call --package 0x90aa6f74c3697c793962346291bd1e363d180172 \
+--module usdt \
+--function mint_me \
+--gas-budget 10000 \
+--args 0x6d626465936ceeda9d3590ff1ac42940d52afd25 100000000
