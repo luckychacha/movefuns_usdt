@@ -10,8 +10,40 @@ Created Objects:
 Mutated Objects:
   - ID: 0x00a0924adc1a013bd1eaf11208233c8ff2bcd940 , Owner: Account Address ( 0x1943ae8a0108ff02952b1ff39c25a1b34f680901 )
 
-sui client call --package 0x90aa6f74c3697c793962346291bd1e363d180172 \
+1.sui client 创建地址以及配置文件: ~/.sui/sui_config/client.yaml
+2. sui client publish --gas-budget 10000 发布
+
+----- Certificate ----
+Transaction Hash: I573fw4BnkwJCxfSHlIosgV9G7mul7lxVG4U6h+gbNY=
+Transaction Signature: AA==@Moy+62sd7oBR5C/565uMosx1l2/Uh9zS3PN0TqrpNPn834fCMAx2YFgxf2hdDMDSY/19IBgiLoE6ZK8t+HSLAA==@rVEol9H7fF7wzPhoBGyg4LUaHD/L+4dWWUeo9r0gzD0=
+Signed Authorities Bitmap: RoaringBitmap<[0, 1, 3]>
+Transaction Kind : Publish
+----- Transaction Effects ----
+Status : Success
+Created Objects:
+  - ID: 0xe1c42747d691071e00bf9b0741f90f40c0e57b70 , Owner: Account Address ( 0x0b0f78b61b5adfcb660ee4398f6afe26261f8e26 )
+  - ID: 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b , Owner: Immutable
+Mutated Objects:
+  - ID: 0x0c0106ef965fd3b711588d8b12446fbdb7e34c0d , Owner: Account Address ( 0x0b0f78b61b5adfcb660ee4398f6afe26261f8e26 )
+
+3.sui client objects
+1）地址1：package 地址：0x2::coin::TreasuryCap<0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT> 中的 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b
+2）地址2：取得具有 TreasuryCap 能力的地址：0xe1c42747d691071e00bf9b0741f90f40c0e57b70
+
+
+4. mint me
+sui client call --package 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b \
 --module usdt \
 --function mint_me \
 --gas-budget 10000 \
---args 0x6d626465936ceeda9d3590ff1ac42940d52afd25 100000000
+--args 0xe1c42747d691071e00bf9b0741f90f40c0e57b70 100000000
+
+5. mint to
+1) 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b：package 地址
+2）0xe1c42747d691071e00bf9b0741f90f40c0e57b70：TreasuryCap<0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT>地址
+3）0x0b0f78b61b5adfcb660ee4398f6afe26261f8e26： sui client active-address 得到的地址
+sui client call --package 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b \
+--module usdt \
+--function mint_to \
+--gas-budget 10000 \
+--args 0xe1c42747d691071e00bf9b0741f90f40c0e57b70 100 0x0b0f78b61b5adfcb660ee4398f6afe26261f8e26
