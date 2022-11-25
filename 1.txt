@@ -47,3 +47,53 @@ sui client call --package 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b \
 --function mint_to \
 --gas-budget 10000 \
 --args 0xe1c42747d691071e00bf9b0741f90f40c0e57b70 100 0x0b0f78b61b5adfcb660ee4398f6afe26261f8e26
+
+6.join 方法
+source code: build/movefuns_usdt/sources/dependencies/Sui/coin.move
+
+将两个 sui 对象合并为 1 个
+sui client call --package 0x2 \
+--module coin \
+--function join \
+--gas-budget 10000 \
+--type-args 0x2::sui::SUI \
+--args 0x0c0106ef965fd3b711588d8b12446fbdb7e34c0d 0x1b3bf395f29970fec674b57c4a9832b0ec839c01
+
+将两个 usdt 对象合并为 1 个
+sui client call --package 0x2 \
+--module coin \
+--function join \
+--gas-budget 10000 \
+--type-args 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT \
+--args 0x3ae62e30f89d09d837680c56e5aa67b718b3cfba 0x94dfaa3024bce301ea5ef3ae077b5dab6c082289
+
+7.split
+source code: build/movefuns_usdt/sources/dependencies/Sui/pay.move
+
+sui client call --package 0x2 \
+--module pay \
+--function split_vec \
+--gas-budget 10000 \
+--type-args 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT \
+--args 0x1ad339054435a19e17fd16686fe2a4036a4eec7a '[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]'
+
+
+
+
+浮点数会失败：vector<u64>
+sui client call --package 0x2 \
+--module pay \
+--function split_vec \
+--gas-budget 10000 \
+--type-args 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT \
+--args 0x050e869a126e71c2b683052fd08cde6a206468d2 '[0.5, 0.5]'
+
+8. join_vec
+source code: build/movefuns_usdt/sources/dependencies/Sui/pay.move
+
+sui client call --package 0x2 \
+--module pay \
+--function join_vec \
+--gas-budget 10000 \
+--type-args 0xf934dfadb4e37900bdbf84b76a0cb74e4fe9d10b::usdt::USDT \
+--args 0x1ad339054435a19e17fd16686fe2a4036a4eec7a '["0xfd526b8812edfb3055622b3f0b40b09d744cea07", "0xfac6aab598daa5ec3d963616f35caefe5c0d730e"]'
